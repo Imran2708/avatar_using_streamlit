@@ -96,17 +96,13 @@ def get_synthesis(job_id):
  
 if __name__ == '__main__':
 
-    #query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
-    col1, col2, col3, col4 = st.columns([2,1,1,1])
+    query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
+    col1, col2, col3 = st.columns(2)
     with col1:
-        query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
-    with col2:
         avatar = st.radio('Select an avatar character:', key="visibility", options=["lisa"],)
-    with col3:
-        voice = st.selectbox('Select voice:', ('en-US-JennyNeural', 'en-US-GuyNeural', 'en-US-AriaNeural', 'en-US-DavisNeural', 'en-US-AmberNeural', 'en-US-AndrewNeural', 'en-US-AshleyNeural', 'en-US-BrandonNeural','en-US-BrianNeural', 'en-US-ChristopherNeural','en-US-CoraNeural','en-US-ElizabethNeural','en-US-EmmaNeural','en-US-EricNeural','en-US-JacobNeural','en-US-JaneNeural','en-US-JasonNeural','en-US-MichelleNeural','en-US-MonicaNeural'), 
-                             label_visibility=st.session_state.visibility, disabled=st.session_state.disabled,)
-    with col4:
-        generate = st.button('Generate video')
+    with col2:
+        voice = st.selectbox('Select voice:', ('en-US-JennyNeural', 'en-US-GuyNeural', 'en-US-AriaNeural', 'en-US-DavisNeural', 'en-US-AmberNeural', 'en-US-AndrewNeural', 'en-US-AshleyNeural', 'en-US-BrandonNeural','en-US-BrianNeural', 'en-US-ChristopherNeural','en-US-CoraNeural','en-US-ElizabethNeural','en-US-EmmaNeural','en-US-EricNeural','en-US-JacobNeural','en-US-JaneNeural','en-US-JasonNeural','en-US-MichelleNeural','en-US-MonicaNeural'),)
+    generate = st.button('Generate video')
     if generate or st.session_state.get("submit"):
         if not query:
             st.error("Please enter a statement!")
