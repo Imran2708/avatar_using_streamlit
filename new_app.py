@@ -95,8 +95,7 @@ def get_synthesis(job_id):
  
  
 if __name__ == '__main__':
-
-    query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
+	query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
     col1, col2= st.columns(2)
     with col1:
         avatar = st.radio('Select an avatar character:', key="visibility", options=["lisa"],)
@@ -112,10 +111,8 @@ if __name__ == '__main__':
             if job_id is not None:
                 while True:
                     url = f'https://{SERVICE_REGION}.{SERVICE_HOST}/api/texttospeech/3.1-preview1/batchsynthesis/talkingavatar/{job_id}' 
-                    header = {
-						'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY 
-            		}
-            		response = requests.get(url, headers=header)
+                    header = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY}
+					response = requests.get(url, headers=header)
             		if response.status_code < 400:
                 		logger.debug('Get batch synthesis job successfully')
                 		logger.debug(response.json())
