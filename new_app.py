@@ -109,7 +109,8 @@ if __name__ == '__main__':
             st.session_state["submit"] = True
             job_id = submit_synthesis(query,avatar,voice)
             if job_id is not None:
-                while True:
+                timeout = time.time() +120 #set a timeout of 2 minutes
+                while time.time() < timeout:
                     url = f'https://{SERVICE_REGION}.{SERVICE_HOST}/api/texttospeech/3.1-preview1/batchsynthesis/talkingavatar/{job_id}' 
                     header = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY}
                     response = requests.get(url, headers=header)
@@ -123,11 +124,16 @@ if __name__ == '__main__':
                         logger.error(f'Failed to get batch synthesis job: {response.text}')
                     
                     status = response.json()['status']
-                    
+             
                     if status == 'Succeeded':
                         #logger.info('batch avatar synthesis job succeeded')
-                        st.video(url1,format="mp4")
+                        st.video(list(url1)[0],format="mp4")
                         break
-                    #elif status == 'Failed':
-                    #    st.markdown("Something is wrong!")
-                    #    break
+                    elif status == 'Failed':
+                        st.error('Batch avatar synthesis job failed')
+                        break
+                    else:
+                        st.info(f'Batch avatar synthesis is still runnning, status:{status}')
+                        time.sleep(5)
+                else:
+                    st.error('Timeout: Batch avatar synthesis job took too long')
