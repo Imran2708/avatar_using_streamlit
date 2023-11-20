@@ -68,12 +68,12 @@ def submit_synthesis(query,avatar,voice):
     }
     response = requests.post(url, json.dumps(payload), headers=header)
     st.info('All good 1')
-    #if response.status_code < 400:
-    #    logger.info('Batch avatar synthesis job submitted successfully')
-    #    logger.info(f'Job ID: {response.json()["id"]}')
-    return response.json()["id"]
-    #else:
-    #    logger.error(f'Failed to submit batch avatar synthesis job: {response.text}')
+    if response.status_code < 400:
+        logger.info('Batch avatar synthesis job submitted successfully')
+        logger.info(f'Job ID: {response.json()["id"]}')
+        return response.json()["id"]
+    else:
+        logger.error(f'Failed to submit batch avatar synthesis job: {response.text}')
  
 if __name__ == '__main__':
     query = st.text_area("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
@@ -120,7 +120,7 @@ if __name__ == '__main__':
 
                     st.info('All good 6')
                     if status == 'Succeeded':
-                        #logger.info('batch avatar synthesis job succeeded')
+                        st.info('batch avatar synthesis job succeeded')
                         st.info('All good 7')
                         st.video(url1,format="mp4")
                         break
