@@ -95,7 +95,7 @@ def get_synthesis(job_id):
  
  
 if __name__ == '__main__':
-	query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
+    query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
     col1, col2= st.columns(2)
     with col1:
         avatar = st.radio('Select an avatar character:', key="visibility", options=["lisa"],)
@@ -112,16 +112,18 @@ if __name__ == '__main__':
                 while True:
                     url = f'https://{SERVICE_REGION}.{SERVICE_HOST}/api/texttospeech/3.1-preview1/batchsynthesis/talkingavatar/{job_id}' 
                     header = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY}
-					response = requests.get(url, headers=header)
-            		if response.status_code < 400:
-                		logger.debug('Get batch synthesis job successfully')
-                		logger.debug(response.json())
-                		if response.json()['status'] == 'Succeeded':
-                    		logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
-                    		url1 = response.json()["outputs"]["result"]
-            		else:
-                		logger.error(f'Failed to get batch synthesis job: {response.text}')
-            		status = response.json()['status']
+                    response = requests.get(url, headers=header)
+                    if response.status_code < 400:
+                        logger.debug('Get batch synthesis job successfully')
+                        logger.debug(response.json())
+                        if response.json()['status'] == 'Succeeded':
+                            logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
+                            url1 = response.json()["outputs"]["result"]
+                    else:
+                        logger.error(f'Failed to get batch synthesis job: {response.text}')
+                    
+                    status = response.json()['status']
+                    
                     if status == 'Succeeded':
                         #logger.info('batch avatar synthesis job succeeded')
                         st.video(url1,format="mp4")
