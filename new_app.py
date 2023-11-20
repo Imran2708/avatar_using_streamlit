@@ -119,21 +119,22 @@ if __name__ == '__main__':
                         logger.debug(response.json())
                         if response.json()['status'] == 'Succeeded':
                             logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
+                            st.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
                             url1 = response.json()["outputs"]["result"]
                     else:
-                        logger.error(f'Failed to get batch synthesis job: {response.text}')
+                        st.error(f'Failed to get batch synthesis job: {response.text}')
                     
                     status = response.json()['status']
              
                     if status == 'Succeeded':
                         #logger.info('batch avatar synthesis job succeeded')
-                        st.video(list(url1)[0],format="mp4")
+                        st.video(url1,format="mp4")
                         break
                     elif status == 'Failed':
                         st.error('Batch avatar synthesis job failed')
                         break
                     else:
-                        st.info(f'Batch avatar synthesis is still runnning, status:{status}')
-                        time.sleep(5)
+                        st.info(f'batch avatar synthesis job is still running, status [{status}]')
+                        time.sleep(10)
                 else:
                     st.error('Timeout: Batch avatar synthesis job took too long')
