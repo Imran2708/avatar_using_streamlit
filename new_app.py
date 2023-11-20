@@ -107,6 +107,8 @@ if __name__ == '__main__':
                         st.info('All good 4')
                         logger.debug('Get batch synthesis job successfully')
                         logger.debug(response.json())
+                        status = response.json()['status']
+                        st.info(f'batch avatar status [{status}]')
                         if response.json()['status'] == 'Succeeded':
                             st.info('All good 5')
                             logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
