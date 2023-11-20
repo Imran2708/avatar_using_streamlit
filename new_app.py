@@ -44,7 +44,7 @@ def submit_synthesis(query,avatar,voice):
         'description': DESCRIPTION,
         "textType": "PlainText",
         'synthesisConfig': {
-            "voice": voice,
+            "voice": str(voice),
         },
         # Replace with your custom voice name and deployment ID if you want to use custom voice.
         # Multiple voices are supported, the mixture of custom voices and platform voices is allowed.
@@ -54,11 +54,11 @@ def submit_synthesis(query,avatar,voice):
         },
         "inputs": [
             {
-                "text": query,
+                "text": str(query),
             },
         ],        "properties": {
             "customized": False, # set to True if you want to use customized avatar
-            "talkingAvatarCharacter": avatar,  # talking avatar character
+            "talkingAvatarCharacter": str(avatar),  # talking avatar character
             "talkingAvatarStyle": "graceful-sitting",  # talking avatar style, required for prebuilt avatar, optional for custom avatar
             "videoFormat": "mp4",  # mp4 or webm, webm is required for transparent background
             "videoCodec": "vp9",  # hevc, h264 or vp9, vp9 is required for transparent background; default is hevc
