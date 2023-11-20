@@ -111,15 +111,23 @@ if __name__ == '__main__':
             job_id = submit_synthesis(query,avatar,voice)
             if job_id is not None:
                 while True:
-                    status,url1 = get_synthesis(job_id)
+                    url = f'https://{SERVICE_REGION}.{SERVICE_HOST}/api/texttospeech/3.1-preview1/batchsynthesis/talkingavatar/{job_id}' 
+                    header = {
+						'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY 
+            		}
+            		response = requests.get(url, headers=header)
+            		if response.status_code < 400:
+                		logger.debug('Get batch synthesis job successfully')
+                		logger.debug(response.json())
+                		if response.json()['status'] == 'Succeeded':
+                    		logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
+                    		url1 = response.json()["outputs"]["result"]
+            		else:
+                		logger.error(f'Failed to get batch synthesis job: {response.text}')
+            		status = response.json()['status']
                     if status == 'Succeeded':
                         #logger.info('batch avatar synthesis job succeeded')
                         st.video(url1,format="mp4")
                         break
                     elif status == 'Failed':
                         st.placeholder("Something is wrong!")
-                        #logger.error('batch avatar synthesis job failed')
-                    #    break
-                    #else:   
-                    #    logger.info(f'batch avatar synthesis job is still running, status [{status}]')
-                    #    time.sleep(5)
