@@ -129,4 +129,4 @@ if __name__ == '__main__':
                         st.video(url1,format="mp4")
                         break
                     elif status == 'Failed':
-                        st.placeholder("Something is wrong!")
+                        st.markdown("Something is wrong!")
