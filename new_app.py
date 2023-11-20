@@ -95,7 +95,7 @@ def get_synthesis(job_id):
  
  
 if __name__ == '__main__':
-    query = st.text_input("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
+    query = st.text_area("Type a sentence ", value= "Hi, I'm a virtual assistant created by Microsoft.", on_change=clear_submit)
     col1, col2= st.columns(2)
     with col1:
         avatar = st.radio('Select an avatar character:', key="visibility", options=["lisa"],)
