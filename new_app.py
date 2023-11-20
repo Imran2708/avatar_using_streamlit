@@ -128,6 +128,6 @@ if __name__ == '__main__':
                         #logger.info('batch avatar synthesis job succeeded')
                         st.video(url1,format="mp4")
                         break
-                    elif status == 'Failed':
-                        st.markdown("Something is wrong!")
-                        break
+                    #elif status == 'Failed':
+                    #    st.markdown("Something is wrong!")
+                    #    break
