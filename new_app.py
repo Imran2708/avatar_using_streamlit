@@ -108,6 +108,7 @@ if __name__ == '__main__':
                         logger.debug('Get batch synthesis job successfully')
                         logger.debug(response.json())
                         if response.json()['status'] == 'Succeeded':
+                            st.info('All good 5')
                             logger.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
                             st.info(f'Batch synthesis job succeeded, download URL: {response.json()["outputs"]["result"]}')
                             url1 = response.json()["outputs"]["result"]
@@ -117,17 +118,17 @@ if __name__ == '__main__':
                     
                     status = response.json()['status']
 
-                    st.info('All good 5')
+                    st.info('All good 6')
                     if status == 'Succeeded':
                         #logger.info('batch avatar synthesis job succeeded')
-                        st.info('All good 6')
+                        st.info('All good 7')
                         st.video(url1,format="mp4")
                         break
                     elif status == 'Failed':
                         st.error('Batch avatar synthesis job failed')
                         break
                     else:
-                        st.info('All good 7')
+                        st.info('All good 8')
                         st.info(f'batch avatar synthesis job is still running, status [{status}]')
                         time.sleep(10)
                 else:
