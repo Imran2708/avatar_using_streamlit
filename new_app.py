@@ -131,5 +131,5 @@ if __name__ == '__main__':
                         break
                     else:
                         logger.info(f'batch avatar synthesis job is still running, status [{status}]')
-                        st.info(f'batch avatar synthesis job is still running, status [{status}]')
+                        #st.info(f'batch avatar synthesis job is still running, status [{status}]')
                         time.sleep(5)
