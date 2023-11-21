@@ -10,8 +10,6 @@ import requests
 
 st.title("Text to speech Avatar using Streamlit")
 
-st.markdown('## Key Metrics')
-
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,  # set to logging.DEBUG for verbose output
         format="[%(asctime)s] %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p %Z")
 logger = logging.getLogger(__name__)
